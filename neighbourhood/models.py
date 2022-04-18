@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
@@ -34,3 +35,24 @@ class NeighbourHood(models.Model):
     def find_neighbourhood(self,neighbourhood_id):
         neighbourhood=NeighbourHood.objects.filter(self=neighbourhood_id)
         return neighbourhood
+
+class Profile(models.Model):
+    profile_photo = CloudinaryField('image')
+    name=models.TextField(max_length=44)
+    user=models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')
+    neighborhood=models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
+    location = models.CharField(max_length=50, blank=True, null=True)
+    email=models.CharField(null=True, max_length=50)
+    phone_number=models.IntegerField(null=True)
+
+    @receiver(post_save , sender = User)
+    def create_profile(instance,sender,created,**kwargs):
+      if created:
+        Profile.objects.create(user = instance)
+
+    @receiver(post_save,sender = User)
+    def save_profile(sender,instance,**kwargs):
+      instance.profile.save()
+
+      def __str__(self):
+        return f'{self.user.username} profile'
