@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from .forms import NewUserForm
+from .forms import NewUserForm, UpdateProfileForm
 from .models import Profile, NeighbourHood, Business
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -60,3 +61,19 @@ def profile(request):
     current_user = request.user
     profile = Profile.objects.filter(user_id=current_user.id).first()
     return render(request, "profile.html", {"profile": profile, })
+
+
+
+def update_profile(request, id):
+    user = User.objects.get(id=id)
+    profile = Profile.objects.get(user_id=user)
+    form = UpdateProfileForm(instance=profile)
+    if request.method == "POST":
+        form = UpdateProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+
+            profile = form.save(commit=False)
+            profile.save()
+            return redirect('profile')
+
+    return render(request, 'update_profile.html', {"form": form})
