@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import NeighbourHood
+from .models import NeighbourHood, Business
 from django.contrib.auth.models import User
 # Create your tests here.
 
@@ -12,3 +12,20 @@ class TestNeighbourhood(TestCase):
     def test_instance(self):
         self.assertTrue(isinstance(self.new_neighbourhood, NeighbourHood))
 
+class BusinessTestClass(TestCase):
+    def setUp(self):
+        self.business = Business(name='Test Business')
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.business, Business))
+
+    def test_save_method(self):
+        self.business.save()
+        businesses = Business.objects.all()
+        self.assertTrue(len(businesses) > 0)
+
+    def test_delete_method(self):
+        self.business.save()
+        self.business.delete_business()
+        businesses = Business.objects.all()
+        self.assertTrue(len(businesses) == 0)

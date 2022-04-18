@@ -40,7 +40,7 @@ class Profile(models.Model):
     profile_photo = CloudinaryField('image')
     name=models.TextField(max_length=44)
     user=models.OneToOneField(User,on_delete=models.CASCADE, related_name='profile')
-    neighborhood=models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
+    neighbourhood=models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
     location = models.CharField(max_length=50, blank=True, null=True)
     email=models.CharField(null=True, max_length=50)
     phone_number=models.IntegerField(null=True)
@@ -56,3 +56,36 @@ class Profile(models.Model):
 
       def __str__(self):
         return f'{self.user.username} profile'
+
+
+class Business(models.Model):
+    name = models.CharField(max_length=150, verbose_name='Business Name', null=True, blank=True)
+    description = models.TextField(blank=True, verbose_name='Description')
+    email = models.CharField(max_length=150, verbose_name='Business Email Address', null=True, blank=True)
+    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, verbose_name='NeighbourHood')
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Business Owner')
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Date Created')
+    
+    def __str__(self):
+        return str(self.name)
+
+    def get_businesses(self):
+        businesses = Business.objects.all()
+        return businesses
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    def find_business(self,business_id):
+        business = Business.objects.filter(self = business_id)
+        return business
+
+    def update_business(self, id, name, description, email, neighbourhood):
+        update = NeighbourHood.objects.filter(id = id).update(name = name , description = description, email = email, neighbourhood = neighbourhood)
+        return update
+    
+    class Meta:
+        verbose_name_plural = 'Businesses'
