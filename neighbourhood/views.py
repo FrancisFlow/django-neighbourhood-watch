@@ -95,3 +95,10 @@ def create_neighbourhood(request):
         neighbourhood_form=NeighbourHoodForm()
     params= {'neighbourhood_form':neighbourhood_form}
     return render(request, 'create_neighbourhood.html', params)
+
+
+@login_required(login_url='/login/')
+def single_neighbourhood(request, name):
+    current_user=request.user
+    hood= NeighbourHood.objects.get(name=name)
+    return render(request, 'single_neighbourhood.html', {'hood':hood, current_user: current_user})    

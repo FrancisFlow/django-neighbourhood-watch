@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="">
+        <h2 class="text-center mb-5 b-text"> {{hood.name}}, {{hood.location}}</h2>
+        <h3> Local health department number: {{hood.helath_no}} </h3>
+        <h3> Local Police Hotline: {{hood.police_no}}  </h3>
+
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{hood.neighbourhood_photo.url}}" class="img-responsive" style="max-width:40rem; max-height:30rem;" >
+            </div>
+
+            <div class="col-md-3 mt-5">
+                <p> Residents: {{hood.occupants_count}} </p>
+                <p>  </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock %}

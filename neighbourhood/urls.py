@@ -10,5 +10,5 @@ urlpatterns=[
     path('profile/', views.profile, name='profile'),
     path('update_profile/<int:id>', views.update_profile, name='update_profile'),
     path('create_neighbourhood/', views.create_neighbourhood, name='create_neighbourhood'),
-
+    path('single_neighbourhood/<str:name>/', views.single_neighbourhood, name='single_neighbourhood'),
 ]
