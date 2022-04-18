@@ -9,6 +9,6 @@ urlpatterns=[
     path('logout/', views.logout_request, name='logout'),
     path('profile/', views.profile, name='profile'),
     path('update_profile/<int:id>', views.update_profile, name='update_profile'),
-
+    path('create_neighbourhood/', views.create_neighbourhood, name='create_neighbourhood'),
 
 ]

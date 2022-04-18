@@ -31,3 +31,9 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['user']
+
+
+class NeighbourHoodForm(forms.ModelForm):
+    class Meta:
+        model=NeighbourHood
+        fields=['name', 'location', 'occupants_count', 'neighbourhood_photo', 'health_no', 'police_no']

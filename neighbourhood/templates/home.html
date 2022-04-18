@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        {% for hoods in neighbourhoods %}
+        <div class="col-md-4">
+            <img src="{{hoods.neighbourhood_photo.url}}">
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}
