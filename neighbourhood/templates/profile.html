@@ -19,7 +19,7 @@
                     <p> Username: {{user.username}} </p>
 
                     <p>
-                        {% if profile.Neighbourhood %}
+                        {% if profile.neighbourhood %}
                         Neigborhood: {{profile.neighbourhood}}
                         {% else %}
                         <span class="text-danger"> No Neighbourhood added </span>
@@ -38,7 +38,15 @@
                     <p> Email: {{profile.email}} </p>
                 </div>
              </div>
-
+             <div class="col-md-6 text-center">
+                 <div class="row">
+                     <div>
+                         <a href="{% url 'update_profile' user.id %}">
+                             Edit Profile
+                         </a>
+                     </div>
+                 </div>
+             </div>
 
         </div>
     </div>
