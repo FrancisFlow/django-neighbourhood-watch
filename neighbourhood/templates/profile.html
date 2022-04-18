@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<section class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card text-left">
+                {% if profile.profile_photo %}
+
+                <img src="{{user.profile.profile_photo.url}}" alt="profile pic" style="border-radius: 50%; width: 200px; height: 200px;">
+                {% else %}
+                <p> {{user.username}} has no profile picture yet</p>
+                {% endif %}
+
+                <div class="card-body">
+                    <p> Name: {{profile.name}} </p>
+                    <p> Username: {{user.username}} </p>
+
+                    <p>
+                        {% if profile.Neighbourhood %}
+                        Neigborhood: {{profile.neighbourhood}}
+                        {% else %}
+                        <span class="text-danger"> No Neighbourhood added </span>
+                        {% endif %}
+
+                    </p>
+
+
+                </div>
+                <div class="card-footer">
+                    <h2> Contact Information</h2>
+
+                    <p>
+                        Phone_number: {{profile.phone_number}}
+                    </p>
+                    <p> Email: {{profile.email}} </p>
+                </div>
+             </div>
+
+
+        </div>
+    </div>
+</section>
+
+
+{% endblock %} 

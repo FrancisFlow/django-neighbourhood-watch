@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import NewUserForm
+from .models import Profile, NeighbourHood, Business
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -48,3 +49,14 @@ def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect("/")
+
+    # end authenticate request
+
+
+#profile functions
+
+@login_required()
+def profile(request):
+    current_user = request.user
+    profile = Profile.objects.filter(user_id=current_user.id).first()
+    return render(request, "profile.html", {"profile": profile, })
