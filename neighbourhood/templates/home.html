@@ -6,11 +6,15 @@
     <div class="row">
         {% for hoods in neighbourhoods %}
         <div class="col-md-4">
-            <img src="{{hoods.neighbourhood_photo.url}}">
+            <img src="{{hoods.neighbourhood_photo.url}}" style="max-width:10rem; max-height:10rem;" >
+        <p> {{hoods.name}}</p>
+        <p> {{hoods.location}} </p>
+        <p> <a href="" class="btn btn-primary">View Neighbourhood</a> </p>
         </div>
 
 
     </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
