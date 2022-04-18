@@ -63,6 +63,7 @@ class Business(models.Model):
     description = models.TextField(blank=True, verbose_name='Description')
     email = models.CharField(max_length=150, verbose_name='Business Email Address', null=True, blank=True)
     neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, verbose_name='NeighbourHood')
+    picture=CloudinaryField('image', blank=True)
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Business Owner')
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Date Created')
     

@@ -37,3 +37,11 @@ class NeighbourHoodForm(forms.ModelForm):
     class Meta:
         model=NeighbourHood
         fields=['name', 'location', 'occupants_count', 'neighbourhood_photo', 'health_no', 'police_no']
+
+
+class BusinessForm(forms.ModelForm):
+
+    class Meta:
+        model=Business
+
+        fields= ['name', 'picture', 'description', 'email', 'owner', 'neighbourhood']

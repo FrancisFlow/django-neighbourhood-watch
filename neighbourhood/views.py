@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import NewUserForm, NeighbourHoodForm, UpdateProfileForm
+from .forms import NewUserForm, BusinessForm, NeighbourHoodForm, UpdateProfileForm
 from .models import Profile, NeighbourHood, Business
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -101,4 +101,26 @@ def create_neighbourhood(request):
 def single_neighbourhood(request, name):
     current_user=request.user
     hood= NeighbourHood.objects.get(name=name)
-    return render(request, 'single_neighbourhood.html', {'hood':hood, current_user: current_user})    
+    return render(request, 'single_neighbourhood.html', {'hood':hood, current_user: current_user})  
+
+
+@login_required(login_url='/login/')
+def create_business(request):
+    current_user= request.user
+    if request.method=='POST':
+        form = BusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            business=form.save(commit=False)
+            business.user=current_user
+            # business.neighbourhood=neighbourhood
+            business.save()
+        return redirect('businesses')
+    else:
+        form=BusinessForm()
+    return render(request, 'create_business.html', {'form': form})
+
+
+@login_required(login_url='/login/')
+def businesses(request):
+    businesses=Business.objects.all().order_by('-id')
+
