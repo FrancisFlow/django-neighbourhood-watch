@@ -1,38 +1,71 @@
+<style>
+    li{
+        padding:0, 5px;
+    }
+    form{
+        padding-left: 5rem;
+    }
 
+</style>
 
 
 <nav class="navbar navbar-expand-lg" style=" color:black;">
-    <a class="navbar-brand" href="/" style=" color:black;">Neighborhood_Watch</a>
+    <a class="navbar-brand" href="/" style=" color:black; font-size:1.5rem;"> 𝐍𝐞𝐢𝐠𝐡𝐛𝐨𝐮𝐫𝐡𝐨𝐨𝐝 🌷 </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" style=" color: white;" navbarSupportedContent">
-        <ul class="navbar-nav mr-auto" style=" color: white;">
+    
+    <div class="collapse navbar-collapse" navbarSupportedContent">
+        <ul class="navbar-nav">
             <li class="nav-item" >
                <a class="nav-link"  href="/"> Home </a> 
             </li>
 
-            <li class="nav-item" >
-                <a class="nav-link" href="">login</a>
-            </li>
-            <li class="nav-item" >
-                <a class="nav-link" href="">logout</a>
-            </li>
-            <li class="nav-item" >
-                <a class="nav-link" href="/profile/">Profile</a>
-            </li>
-            <li class="nav-item" >
-                <a class="nav-link" href=""> Add business </a>
-            </li>
-            <li class="nav-item" >
-                <a href="businesses/" class="nav-link"> Businesses </a>
-            </li>
+                {% if user.is_authenticated %}
+
+        <li class="nav-item" >
+            <a class="nav-link" href="#"> Welcome, {{user.username}} </a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Admin
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/create_business"> Add business </a>
+                <a class="dropdown-item" href="/create_neighbourhood/"> Create a Neighbourhood</a>
+    
+
+                <div class="dropdown-divider"></div>
+             </div>
+
+
+        </li>
+        <li class="nav-item" >
+            <a  class="nav-link" href="/profile">My profile</a>
+
+        </li>
+        <li class="nav-item">
+            <a   class="nav-link" href="/create_post/"> + Post</a>
+
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+        </li>
+
+        {% else %}
+
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+        </li>
+        {% endif %}
+           
+           
         </ul>
         <div class="">
             <div class="forms">
-                <form class="me-auto search-form" target="_self" action="{% url 'search' %} >
+                <form class="me-auto search-form" target="_self" action="{% url 'search' %}">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search Business"
                         name="search_term">

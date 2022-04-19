@@ -58,14 +58,13 @@ def logout_request(request):
 
 #profile functions
 
-@login_required()
+@login_required(login_url='/login/')
 def profile(request):
     current_user = request.user
     profile = Profile.objects.filter(user_id=current_user.id).first()
     return render(request, "profile.html", {"profile": profile, })
 
-
-
+@login_required(login_url='/login/')
 def update_profile(request, id):
     user = User.objects.get(id=id)
     profile = Profile.objects.get(user_id=user)
