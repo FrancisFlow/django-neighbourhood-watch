@@ -13,4 +13,7 @@ urlpatterns=[
     path('single_neighbourhood/<str:name>/', views.single_neighbourhood, name='single_neighbourhood'),
     path('create_business/', views.create_business, name='create_business'),
     path('businesses/', views.businesses, name='businesses'),
+    path('search/', views.search, name='search'),
+    path('create_post/', views.create_post, name='create_post'),
+    path('posts/', views.posts, name='posts')
 ]

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import NewUserForm, BusinessForm, NeighbourHoodForm, UpdateProfileForm
-from .models import Profile, NeighbourHood, Business
+from .forms import NewUserForm, PostForm, BusinessForm, NeighbourHoodForm, UpdateProfileForm
+from .models import Profile, Post, NeighbourHood, Business
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -136,3 +136,26 @@ def search(request):
     else:
         message = "You haven't searched for any term"
         return render(request, "search.html", {"message": message})
+
+@login_required(login_url='/login/')
+def create_post(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user=current_user
+            post.save()
+            return redirect('/posts')
+    else:
+        form = PostForm()
+
+    return render(request, 'create_post.html', {'form': form})
+
+
+@login_required(login_url='/login/')
+def posts(request):
+
+    posts=Post.objects.all().order_by('id')
+
+    return render(request, 'posts.html', {'posts': posts})

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2>  Posts </h2>
+    <div class="row mt-4">
+        {% for post in posts %}
+
+        <div class="col-md-4 card">
+            <img src="{{post.picture.url}}" alt="{{post.title}}" style="border-radius: 50%; width: 50%; height: auto;">
+        
+        <div class="card-body">
+            <h5> {{post.title}}</h5>
+            <p> {{post.location}} </p>
+            <p> {{post.content}} </p>
+        </div>
+        <div class="card-footer">
+            <p> Created by: {post.user} </p>
+        </div>
+        </div>
+        {% empty %}{% endblock %}
+        <div class="col-md-12">
+            <div class="card mb-4 post-card">
+                <div class="card-body text-center">
+                    <h3> No posts available </h3>
+                    </div>
+            </div>
+        </div>
+
+
+              {% endfor %}
+            
+
+    </div>
+</div>
+
+{% endblock %}
