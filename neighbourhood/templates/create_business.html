@@ -1,0 +1,22 @@
+{% extends 'base.html'%} 
+{% load bootstrap4%}
+{% block content %}
+
+<div class="container">
+    <div class="text-center">
+        <div class="title">
+        <h3> Add a Business to local services</h3>
+    </div>
+    </div>
+    <form class="mb-3" action="{% url 'create_business'%}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="form-group">
+            <input type="submit" class="btn btn-info" value="Create Business">
+        </div>
+    </form>
+
+</div>
+
+
+{% endblock %}
