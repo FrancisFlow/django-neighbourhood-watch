@@ -11,10 +11,9 @@
         <p> {{hoods.location}} </p>
         <p> <a href="{% url 'single_neighbourhood' hoods.name %} " class="btn btn-primary">View Neighbourhood</a> </p>
         </div>
-
+        {% endfor %}
 
     </div>
-    {% endfor %}
 </div>
 
 {% endblock %}
