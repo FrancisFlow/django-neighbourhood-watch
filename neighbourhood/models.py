@@ -90,3 +90,30 @@ class Business(models.Model):
     
     class Meta:
         verbose_name_plural = 'Businesses'
+
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=50,null=True)
+    content = models.TextField(blank=True, null=True)
+    location=models.CharField(max_length=55, blank=True)
+    photo = CloudinaryField("image",blank=True,null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    neighborhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
+    created_on = models.DateTimeField(auto_now_add=True,null=True)
+
+    class Meta:
+        ordering = ['-pk']
+        
+    def __str__(self):
+        return f'{self.title} Post'
+    
+    def delete_post(self):
+        self.delete()
+    
+
+    def create_post(self):
+        self.save()
+        
+    def update_post(self):
+        self.update()
