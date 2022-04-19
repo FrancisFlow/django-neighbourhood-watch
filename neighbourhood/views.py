@@ -123,4 +123,4 @@ def create_business(request):
 @login_required(login_url='/login/')
 def businesses(request):
     businesses=Business.objects.all().order_by('-id')
-
+    return render(request, 'businesses.html', {'businesses': businesses})
