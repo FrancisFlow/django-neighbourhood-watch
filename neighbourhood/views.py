@@ -124,3 +124,15 @@ def create_business(request):
 def businesses(request):
     businesses=Business.objects.all().order_by('-id')
     return render(request, 'businesses.html', {'businesses': businesses})
+
+@login_required(login_url='/login/')
+def search(request):
+    if 'search_term' in request.GET and request.GET["search_term"]:
+        search_term = request.GET.get("search_term")
+        searched_businesses = Business.objects.filter(name__icontains=search_term)
+        message = f"Search For: {search_term}"
+
+        return render(request, "search.html", {"message": message, "businesses": searched_businesses})
+    else:
+        message = "You haven't searched for any term"
+        return render(request, "search.html", {"message": message})
