@@ -31,7 +31,7 @@ Technologies used to develop this application:
 
 ## Known Bugs
 
-As of 11th April, 2022, there are no know bugs. If you do find one, feel free to reach out to me.
+As of 19th April, 2022, there are no know bugs. If you do find one, feel free to reach out to me.
 
 
 ## Support and contact details
